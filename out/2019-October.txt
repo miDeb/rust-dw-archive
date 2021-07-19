@@ -1,0 +1,95 @@
+From kamleshbhalui at gmail.com  Thu Oct  3 03:37:08 2019
+From: kamleshbhalui at gmail.com (kamlesh kumar)
+Date: Thu, 3 Oct 2019 09:07:08 +0530
+Subject: [rust-dev] Optimization removes checks
+Message-ID: <CABKRkgieF_FV8W=O-_xu=iY-Vz=q+sOGj1sRS7_s7w7z=h2z0w@mail.gmail.com>
+
+why does optimization removes overflow checks?
+consider below testcase
+$cat test.rs
+fn fibonacci(n: u32) -> u32 {
+    let mut f:u32 = 0;
+    let mut s:u32 = 1;
+    let mut next: u32 =f+s;
+    for _ in 1..n {
+                f = s;
+                s= next;
+               next=f+s;
+    }
+    next
+}
+fn main() {
+println!("{}",fibonacci(100));
+}
+
+$rustc test.rs -C opt-level=1
+$./test
+2425370821
+
+$rustc test.rs -C opt-level=0
+$./test
+thread 'main' panicked at 'attempt to add with overflow', p11.rs:11:7
+note: run with `RUST_BACKTRACE=1` environment variable to display a
+backtrace.
+
+./Kamlesh
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.mozilla.org/pipermail/rust-dev/attachments/20191003/44d24459/attachment.html>
+
+From matthieu.monrocq at gmail.com  Thu Oct  3 08:41:04 2019
+From: matthieu.monrocq at gmail.com (Matthieu Monrocq)
+Date: Thu, 3 Oct 2019 10:41:04 +0200
+Subject: [rust-dev] Optimization removes checks
+In-Reply-To: <CABKRkgieF_FV8W=O-_xu=iY-Vz=q+sOGj1sRS7_s7w7z=h2z0w@mail.gmail.com>
+References: <CABKRkgieF_FV8W=O-_xu=iY-Vz=q+sOGj1sRS7_s7w7z=h2z0w@mail.gmail.com>
+Message-ID: <CAKE6Rfi=9Oq57vp8k9T9vx3tKH1rkfA=mXALpXXcBMpvph=11Q@mail.gmail.com>
+
+Hello Kamlesh,
+
+This mailing list is more-or-less dead; please consider asking your
+questions on https://users.rust-lang.org/.
+
+Regards
+
+On Thu, Oct 3, 2019 at 5:37 AM kamlesh kumar <kamleshbhalui at gmail.com>
+wrote:
+
+> why does optimization removes overflow checks?
+> consider below testcase
+> $cat test.rs
+> fn fibonacci(n: u32) -> u32 {
+>     let mut f:u32 = 0;
+>     let mut s:u32 = 1;
+>     let mut next: u32 =f+s;
+>     for _ in 1..n {
+>                 f = s;
+>                 s= next;
+>                next=f+s;
+>     }
+>     next
+> }
+> fn main() {
+> println!("{}",fibonacci(100));
+> }
+>
+> $rustc test.rs -C opt-level=1
+> $./test
+> 2425370821
+>
+> $rustc test.rs -C opt-level=0
+> $./test
+> thread 'main' panicked at 'attempt to add with overflow', p11.rs:11:7
+> note: run with `RUST_BACKTRACE=1` environment variable to display a
+> backtrace.
+>
+> ./Kamlesh
+> _______________________________________________
+> Rust-dev mailing list
+> Rust-dev at mozilla.org
+> https://mail.mozilla.org/listinfo/rust-dev
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.mozilla.org/pipermail/rust-dev/attachments/20191003/9cd0448b/attachment.html>
+

@@ -1,0 +1,108 @@
+From mahdiumd at gmail.com  Mon Aug 12 19:44:07 2019
+From: mahdiumd at gmail.com (Matt Zand)
+Date: Mon, 12 Aug 2019 15:44:07 -0400
+Subject: [rust-dev] conditional compiling in rust
+Message-ID: <CAJHWHyXBiC=_XDAJwjBXSW=1eWa58psRJZGxwnizzhJV3FMezg@mail.gmail.com>
+
+I am working on conditional compiling in rust
+
+      #[cfg(feature = "foo")]
+
+I wonder what is right way to call conditional statement:
+
+      #ifdef ENABLE_FOO
+      fn ... {
+      }
+      #endif
+
+ or
+
+      #[cfg(feature = "foo")]
+      fn ... {
+      }
+
+Also, are there situation where above conditions may not work?
+
+
+
+-- 
+Cheers,
+
+Matt Zand
+Cell: 202-420-9192
+Work: 240-200-6131
+High School Technology Services <https://myhsts.org/>
+DC Web Makers <https://dcwebmakers.com/>
+Coding Bootcamps <https://coding-bootcamps.com/>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.mozilla.org/pipermail/rust-dev/attachments/20190812/363bed44/attachment.html>
+
+From lists at dhardy.name  Mon Aug 12 20:47:16 2019
+From: lists at dhardy.name (Diggory Hardy)
+Date: Mon, 12 Aug 2019 21:47:16 +0100
+Subject: [rust-dev] conditional compiling in rust
+In-Reply-To: <CAJHWHyXBiC=_XDAJwjBXSW=1eWa58psRJZGxwnizzhJV3FMezg@mail.gmail.com>
+References: <CAJHWHyXBiC=_XDAJwjBXSW=1eWa58psRJZGxwnizzhJV3FMezg@mail.gmail.com>
+Message-ID: <516dde0f54131af6f64e871b6d909305902c6f2d.camel@dhardy.name>
+
+Wow, I thought this mailing list died a long time ago. Try 
+https://users.rust-lang.org/ or Stack Overflow for this type of
+question, or just look for examples.
+#ifdef is definitely not Rust. Your other example is fine.
+
+On Mon, 2019-08-12 at 15:44 -0400, Matt Zand wrote:
+> I am working on conditional compiling in rust
+> 
+>       #[cfg(feature = "foo")]
+> 
+> I wonder what is right way to call conditional statement:
+> 
+>       #ifdef ENABLE_FOO
+>       fn ... {
+>       }
+>       #endif
+>  
+>  or 
+> 
+>       #[cfg(feature = "foo")]
+>       fn ... {
+>       }
+> 
+> Also, are there situation where above conditions may not work?
+> 
+> _______________________________________________Rust-dev mailing 
+> listRust-dev at mozilla.org
+> https://mail.mozilla.org/listinfo/rust-dev
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.mozilla.org/pipermail/rust-dev/attachments/20190812/2caa6eaf/attachment.html>
+
+From emil at fuse.pl  Mon Aug 12 20:57:12 2019
+From: emil at fuse.pl (Emil Oppeln-Bronikowski)
+Date: Mon, 12 Aug 2019 22:57:12 +0200
+Subject: [rust-dev] conditional compiling in rust
+In-Reply-To: <516dde0f54131af6f64e871b6d909305902c6f2d.camel@dhardy.name>
+References: <CAJHWHyXBiC=_XDAJwjBXSW=1eWa58psRJZGxwnizzhJV3FMezg@mail.gmail.com>
+ <516dde0f54131af6f64e871b6d909305902c6f2d.camel@dhardy.name>
+Message-ID: <20190812205712.4g2fy4bfysfprozs@vimes>
+
+> Wow, I thought this mailing list died a long time ago.
+
+It was "decomissioned" but it never was dropped. I guess someone should
+just pull a lever and let it go. Otherwise other people will be as
+dissapointed as I was. ;-)
+
+-- 
+"I went to the woods because I wished to live deliberately, to front 
+only the essential facts of life, and see if I could not learn what 
+it had to teach, and not, when I came to die, discover that I had 
+not lived" ? Henry David Thoreau
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: <http://mail.mozilla.org/pipermail/rust-dev/attachments/20190812/6c288a25/attachment.sig>
+

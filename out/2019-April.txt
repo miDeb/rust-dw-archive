@@ -1,0 +1,96 @@
+From nadavvin at gmail.com  Fri Apr 26 13:52:32 2019
+From: nadavvin at gmail.com (Nadav Vinik)
+Date: Fri, 26 Apr 2019 16:52:32 +0300
+Subject: [rust-dev] Extending struct and trait
+Message-ID: <CAMP6mpKBqG93abUd=eHnkFWSX15LxG7CTZOqsm_eYB-8f2=Ruw@mail.gmail.com>
+
+Hello
+
+I don't know why you don't want to implement heritage of classes but it
+will be easier if will be a macro like: implement_trait_on object(trait,
+self.c, except_methods)!
+
+for example:
+
+fn get_homogeneous(&self) -> bool {
+     self.c.get_homogeneous()
+}
+
+Rust complain about missing 1 parameter but it not display what the missing
+parameter.
+In the trait there is only one parameter.
+
+---------------
+error[E0049]: method `set_center_widget` has 1 type parameter but its trait
+declaration has 2 type parameters
+  --> src/widget.rs:63:25
+   |
+63 |     fn set_center_widget<P: IsA<gtk::Widget>>(&self, widget:
+Option<&P>)
+   |                         ^^^^^^^^^^^^^^^^^^^^^ found 1 type parameter,
+expected 2
+---------------
+
+See at:
+https://users.rust-lang.org/t/i-implement-method-trait-with-two-params-but-rust-insist-that-i-have-only-one/27643
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.mozilla.org/pipermail/rust-dev/attachments/20190426/f6b0faab/attachment.html>
+
+From corey at octayn.net  Fri Apr 26 20:53:42 2019
+From: corey at octayn.net (Corey Richardson)
+Date: Fri, 26 Apr 2019 16:53:42 -0400
+Subject: [rust-dev] Extending struct and trait
+In-Reply-To: <CAMP6mpKBqG93abUd=eHnkFWSX15LxG7CTZOqsm_eYB-8f2=Ruw@mail.gmail.com>
+References: <CAMP6mpKBqG93abUd=eHnkFWSX15LxG7CTZOqsm_eYB-8f2=Ruw@mail.gmail.com>
+Message-ID: <cc20e004-37ef-4e9e-94b5-d346369d48c6@www.fastmail.com>
+
+Hi Nadav,
+
+This list is defunct. You should use users.rust-lang.org. See https://www.rust-lang.org/community
+for other places to communicate.
+
+On Fri, Apr 26, 2019, at 07:03, Nadav Vinik wrote:
+> Hello
+> 
+> I don't know why you don't want to implement heritage of classes but it 
+> will be easier if will be a macro like: implement_trait_on 
+> object(trait, self.c, except_methods)!
+> 
+> for example:
+> 
+> fn get_homogeneous(&self) -> bool {
+>  self.c.get_homogeneous()
+> }
+> 
+> Rust complain about missing 1 parameter but it not display what the 
+> missing parameter.
+> In the trait there is only one parameter.
+> 
+> ---------------
+> error[E0049]: method `set_center_widget` has 1 type parameter but its 
+> trait declaration has 2 type parameters
+>  --> src/widget.rs:63:25
+>  |
+> 63 | fn set_center_widget<P: IsA<gtk::Widget>>(&self, widget: 
+> Option<&P>) 
+>  | ^^^^^^^^^^^^^^^^^^^^^ found 1 type parameter, expected 2
+> ---------------
+> 
+> See at:
+> https://users.rust-lang.org/t/i-implement-method-trait-with-two-params-but-rust-insist-that-i-have-only-one/27643
+> 
+> Thanks
+> _______________________________________________
+> Rust-dev mailing list
+> Rust-dev at mozilla.org
+> https://mail.mozilla.org/listinfo/rust-dev
+>
+
+-- 
+cmr
+http://octayn.net/
++16038524272
+
